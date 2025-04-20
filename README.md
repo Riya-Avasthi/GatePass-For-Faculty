@@ -101,10 +101,6 @@ The project consists of two main parts:
 - Axios - API requests
 - React Toastify - Notifications
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Contact
 
 For any questions or issues, please contact the KBT College IT department. 
