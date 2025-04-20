@@ -56,7 +56,7 @@ router.get("/all-requests", authMiddleware, viewerMiddleware, async (req, res) =
     
     const allRequests = await LeaveRequest.find(query)
       .sort({ createdAt: -1 })
-      .populate('facultyId', 'name email employeeId');
+      .populate('facultyId', 'name email employeeId department');
     
     console.log(`Found ${allRequests.length} approved/rejected requests for viewer`);
     
@@ -95,7 +95,7 @@ router.get("/all-allowed", authMiddleware, viewerMiddleware, async (req, res) =>
     
     const allowedRequests = await LeaveRequest.find(query)
       .sort({ allowedAt: -1 }) // Most recently allowed first
-      .populate('facultyId', 'name email employeeId');
+      .populate('facultyId', 'name email employeeId department');
     
     console.log(`Found ${allowedRequests.length} allowed requests`);
     

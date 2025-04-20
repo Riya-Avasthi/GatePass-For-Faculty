@@ -56,9 +56,12 @@ function Register() {
   const validateForm = () => {
     const errors = {};
     
-    // Email validation for college domain (optional)
-    if (formData.email && !formData.email.endsWith('@kbtcoe.org') && !formData.email.includes('@gmail.com')) {
-      errors.email = "Please use your college email (@kbtcoe.org) or a valid email address";
+    // Email validation for college domain with lastname.firstname format
+    if (formData.email) {
+      const emailRegex = /^[a-z]+\.[a-z]+@kbtcoe\.org$/i;
+      if (!emailRegex.test(formData.email)) {
+        errors.email = "Email must be in format: lastname.firstname@kbtcoe.org";
+      }
     }
     
     // Password strength validation
@@ -136,8 +139,10 @@ function Register() {
                   onChange={handleChange}
                   required
                   className={validationErrors.email ? "input-error" : ""}
+                  placeholder="lastname.firstname@kbtcoe.org"
                 />
-                {validationErrors.email && <div className="error-message">{validationErrors.email}</div>}
+                {/* {validationErrors.email && <div className="error-message">{validationErrors.email}</div>}
+                {!validationErrors.email && <div className="helper-text">Format: lastname.firstname@kbtcoe.org</div>} */}
               </div>
             </div>
             

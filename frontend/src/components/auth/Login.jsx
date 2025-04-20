@@ -10,6 +10,7 @@ function Login() {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
   const [redirectAttempted, setRedirectAttempted] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,14 +37,43 @@ function Login() {
   }, [user, navigate, redirectAttempted, authLoading, location]);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+    
+    // Clear validation errors when field is edited
+    if (validationErrors[name]) {
+      setValidationErrors({
+        ...validationErrors,
+        [name]: null
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    
+    // Email validation for college domain with lastname.firstname format
+    if (formData.email) {
+      const emailRegex = /^[a-z]+\.[a-z]+@kbtcoe\.org$/i;
+      if (!emailRegex.test(formData.email)) {
+        errors.email = "Email must be in format: lastname.firstname@kbtcoe.org";
+      }
+    }
+    
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   async function handleSubmit(e) {
     e.preventDefault();
+    
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
     
     try {
       setError('');
@@ -104,8 +134,11 @@ function Login() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="form-input"
+                  className={`form-input ${validationErrors.email ? "input-error" : ""}`}
+                  placeholder="lastname.firstname@kbtcoe.org" 
                 />
+                 {/* {validationErrors.email && <div className="error-message">{validationErrors.email}</div>}
+                 {!validationErrors.email && <div className="helper-text">Format: lastname.firstname@kbtcoe.org</div>} */}
               </div>
               
               <div className="form-group">

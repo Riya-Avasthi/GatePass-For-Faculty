@@ -63,7 +63,7 @@ const Navbar = () => {
                       to="/update-requests"
                       className={`nav-link ${isActive('/update-requests') ? 'active' : ''}`}
                     >
-                      Update Requests
+                      All Requests
                     </Link>
                   </>
                 )}
@@ -167,7 +167,7 @@ const Navbar = () => {
                     className={`mobile-link ${isActive('/update-requests') ? 'active' : ''}`}
                     onClick={toggleMenu}
                   >
-                    Update Requests
+                    All Requests
                   </Link>
                 </>
               )}

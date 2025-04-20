@@ -397,9 +397,9 @@ const UpdateRequest = () => {
       
       <div className="update-requests-container">
         <div className="update-requests-header">
-          <h2 className="update-requests-title">Update Gate Pass Requests</h2>
+          <h2 className="update-requests-title">All Gate Pass Requests</h2>
           <p className="update-requests-description">
-            Review and manage faculty gate pass requests. You can approve, reject, or update the status of any request.
+            Review faculty gate pass requests.
           </p>
         </div>
         

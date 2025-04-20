@@ -102,13 +102,15 @@ const ViewerPendingRequests = () => {
     const facultyId = faculty.employeeId || '';
     const purpose = request.purpose || '';
     const reason = request.reason || '';
+    const department = faculty.department || '';
     
     return (
       facultyName.toLowerCase().includes(searchTermLower) ||
       facultyEmail.toLowerCase().includes(searchTermLower) ||
       facultyId.toLowerCase().includes(searchTermLower) ||
       purpose.toLowerCase().includes(searchTermLower) ||
-      reason.toLowerCase().includes(searchTermLower)
+      reason.toLowerCase().includes(searchTermLower) ||
+      department.toLowerCase().includes(searchTermLower)
     );
   });
 
@@ -126,7 +128,7 @@ const ViewerPendingRequests = () => {
           <input
             type="text"
             className="search-input"
-            placeholder="Search by name, email, ID, purpose..."
+            placeholder="Search by name, email, ID, department, purpose..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -200,6 +202,7 @@ const ViewerPendingRequests = () => {
                 const facultyName = faculty.name || 'Unknown';
                 const facultyEmail = faculty.email || request.facultyEmail || 'No email';
                 const employeeId = faculty.employeeId || 'No ID';
+                const department = faculty.department || 'No department';
                 
                 return (
                   <tr
@@ -216,6 +219,7 @@ const ViewerPendingRequests = () => {
                       <div className="faculty-name">{facultyName}</div>
                       <div className="faculty-email">{facultyEmail}</div>
                       <div className="faculty-email">ID: {employeeId}</div>
+                      <div className="faculty-department">{department}</div>
                     </td>
                     <td data-label="Request Details">
                       <div className="request-time">

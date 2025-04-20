@@ -144,13 +144,15 @@ const ViewerAllRequests = () => {
     const purpose = request.purpose || '';
     const reason = request.reason || '';
     const status = request.status || '';
+    const department = request.facultyId?.department || '';
     
     return (
       facultyName.toLowerCase().includes(searchTermLower) ||
       facultyEmail.toLowerCase().includes(searchTermLower) ||
       purpose.toLowerCase().includes(searchTermLower) ||
       reason.toLowerCase().includes(searchTermLower) ||
-      status.toLowerCase().includes(searchTermLower)
+      status.toLowerCase().includes(searchTermLower) ||
+      department.toLowerCase().includes(searchTermLower)
     );
   });
 
@@ -168,7 +170,7 @@ const ViewerAllRequests = () => {
           <input
             type="text"
             className="search-input"
-            placeholder="Search by name, email, purpose, status..."
+            placeholder="Search by name, email, department, purpose, status..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -253,6 +255,8 @@ const ViewerAllRequests = () => {
                 // Get faculty info directly from the request
                 const facultyName = request.facultyEmail?.split('@')[0] || 'Unknown';
                 const facultyEmail = request.facultyEmail || 'No email';
+                // Get department from facultyId if available (after adding to backend)
+                const facultyDepartment = request.facultyId?.department || 'No department';
                 
                 return (
                   <tr
@@ -270,6 +274,7 @@ const ViewerAllRequests = () => {
                     <td data-label="Faculty">
                       <div className="faculty-name">{facultyName}</div>
                       <div className="faculty-email">{facultyEmail}</div>
+                      <div className="faculty-department">{facultyDepartment}</div>
                     </td>
                     <td data-label="Request Details">
                       <div className="request-time">

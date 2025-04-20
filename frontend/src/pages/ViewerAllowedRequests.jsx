@@ -79,11 +79,13 @@ const ViewerAllowedRequests = () => {
     
     const searchLower = searchTerm.toLowerCase();
     const facultyName = request.facultyEmail?.split('@')[0] || '';
+    const department = request.facultyId?.department || '';
     return (
       facultyName.toLowerCase().includes(searchLower) ||
       (request.facultyEmail || '').toLowerCase().includes(searchLower) ||
       (request.purpose || '').toLowerCase().includes(searchLower) ||
-      (request.reason || '').toLowerCase().includes(searchLower)
+      (request.reason || '').toLowerCase().includes(searchLower) ||
+      department.toLowerCase().includes(searchLower)
     );
   });
   
@@ -132,7 +134,7 @@ const ViewerAllowedRequests = () => {
           <div className="search-container">
             <input
               type="text"
-              placeholder="Search by faculty, purpose or reason..."
+              placeholder="Search by faculty, department, purpose or reason..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
@@ -201,6 +203,7 @@ const ViewerAllowedRequests = () => {
                     <td data-label="Faculty">
                       <div className="faculty-name">{request.facultyEmail?.split('@')[0] || 'Unknown'}</div>
                       <div className="faculty-email">{request.facultyEmail || 'No email'}</div>
+                      <div className="faculty-department">{request.facultyId?.department || 'No department'}</div>
                     </td>
                     <td data-label="Date">
                       {formatDate(request.date)}

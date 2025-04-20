@@ -31,6 +31,12 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "Invalid role. Must be 'admin', 'faculty', or 'viewer'." });
     }
 
+    // Validate email format (lastname.firstname@kbtcoe.org)
+    const emailRegex = /^[a-z]+\.[a-z]+@kbtcoe\.org$/i;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: "Email must be in format: lastname.firstname@kbtcoe.org" });
+    }
+
     // Validate required fields based on role
     if (role !== 'viewer' && (!employeeId || !designation || !department)) {
       return res.status(400).json({ 
@@ -85,6 +91,13 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    // Validate email format (lastname.firstname@kbtcoe.org)
+    const emailRegex = /^[a-z]+\.[a-z]+@kbtcoe\.org$/i;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: "Email must be in format: lastname.firstname@kbtcoe.org" });
+    }
+    
     const user = await User.findOne({ email });
 
     if (!user || !(await bcrypt.compare(password, user.password))) {

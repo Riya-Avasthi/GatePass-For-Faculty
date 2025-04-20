@@ -230,6 +230,13 @@
   font-size: 0.9rem;
 }
 
+.faculty-department {
+  color: #6c757d;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: 2px;
+}
+
 .request-time {
   color: #6c757d;
   font-size: 0.9rem;
